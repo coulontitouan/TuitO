@@ -1,0 +1,13 @@
+window_sizes 1470 830 344 1120 714 64
+cleanlooks_style
+diagrams
+  active  classdiagram_ref 128002 // TuitO
+    896 572 100 A4 40 0
+end
+show_stereotypes
+selected 
+  package_ref 129 // TuitO
+open
+  class_ref 128002 // Client
+end
+end
