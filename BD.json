@@ -1,6 +1,6 @@
 {
   "toto" : {
-    "follows" : [ "tutu", "titi" ],
+    "suivis" : [ "tutu", "titi" ],
     "messages" : {
       "2" : {
         "date" : "2024-01-20T09:00:00Z",
@@ -11,7 +11,7 @@
     }
   },
   "tutu" : {
-    "follows" : [ "toto" ],
+    "suivis" : [ "toto" ],
     "messages" : {
       "1" : {
         "date" : "2024-01-20T09:00:00Z",
@@ -22,7 +22,7 @@
     }
   },
   "livreur" : {
-    "follows" : [ "toto" ],
+    "suivis" : [ "toto" ],
     "messages" : {
       "4" : {
         "date" : "2024-01-20T09:00:00Z",
@@ -33,7 +33,7 @@
     }
   },
   "titi" : {
-    "follows" : [ "tutu" ],
+    "suivis" : [ "tutu" ],
     "messages" : {
       "3" : {
         "date" : "2024-01-20T09:00:00Z",

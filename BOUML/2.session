@@ -1,0 +1,21 @@
+window_sizes 1920 1009 450 1465 857 104
+
+diagrams
+  active  classdiagram_ref 128002 // TuitO
+    1359 819 90 A3 0 0
+end
+show_stereotypes
+selected operation_ref 132482 // like
+open
+  operation_ref 132098 // stopLike
+  operation_ref 130818 // getMessages
+  operation_ref 130946 // envoyerMessage
+  operation_ref 132226 // supprimerMessage
+  operation_ref 131330 // hashCode
+  operation_ref 132482 // like
+  operation_ref 132354 // supprimer
+  class_ref 128898 // Client
+  deploymentview_ref 128002 // src
+  classview_ref 128258 // unknown
+end
+end

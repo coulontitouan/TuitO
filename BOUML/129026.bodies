@@ -1,0 +1,19 @@
+class ClientHandler
+!!!131586.java!!!	ClientHandler(inout socket : Socket)
+        try{
+            this.socket = socket;
+            this.stream = new InputStreamReader(this.socket.getInputStream());
+            this.reader = new BufferedReader(stream);
+        }catch(IOException e){
+            System.out.println(e);
+        }
+!!!131714.java!!!	run() : void
+        try{
+            String[] raw = reader.readLine().split(":", 2);
+            String pseudo = raw[0];
+            String message = raw[1];
+            System.out.println(pseudo + " : " + message);
+            this.socket.close();
+        }catch(IOException e){
+            System.out.println(e);
+        }

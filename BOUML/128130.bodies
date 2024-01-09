@@ -1,0 +1,20 @@
+class Utilisateur
+!!!130306.java!!!	Utilisateur(in pseudo : String)
+        this.pseudo = pseudo;
+        this.messages = new ArrayList<>();
+!!!130434.java!!!	getPseudo() : String
+        return this.pseudo;
+!!!130562.java!!!	suivre(in pseudo : String) : void
+        BDServeur.getSuivis(this).add(pseudo);
+!!!130690.java!!!	stopSuivre(in pseudo : String) : void
+        BDServeur.getSuiveurs(this).remove(pseudo);
+!!!130818.java!!!	getMessages() : Message
+        return this.messages;
+!!!130946.java!!!	envoyerMessage(in contenu : String) : void
+        this.messages.add(new Message(this, contenu));
+!!!131074.java!!!	ajouterMessage(inout message : Message) : void
+        this.messages.add(message);
+!!!131202.java!!!	toString() : String
+        return this.pseudo;
+!!!131330.java!!!	hashCode() : int
+        return this.pseudo.hashCode();

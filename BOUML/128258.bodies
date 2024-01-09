@@ -1,0 +1,31 @@
+class Message
+!!!129026.java!!!	Message(inout auteur : Utilisateur, in contenu : String)
+        this.id = BDServeur.getIdMessage(this);
+        this.auteur = auteur;
+        this.contenu = contenu;
+        this.date = new Date();
+        this.likes = new ArrayList<>();
+        this.statut = 0;
+!!!129154.java!!!	Message(in id : int, inout auteur : Utilisateur, in contenu : String, inout date : Date, inout likes : List<String>, in statut : int)
+        this.id = id;
+        this.auteur = auteur;
+        this.contenu = contenu;
+        this.date = date;
+        this.likes = likes;
+        this.statut = statut;
+!!!129282.java!!!	getId() : int
+        return this.id;
+!!!129410.java!!!	getAuteur() : Utilisateur
+        return this.auteur;
+!!!129538.java!!!	getContenu() : String
+        return this.contenu;
+!!!129666.java!!!	getDate() : Date
+        return this.date;
+!!!129794.java!!!	getLikes() : List<String>
+        return this.likes;
+!!!129922.java!!!	getStatut() : int
+        return this.statut;
+!!!130050.java!!!	toString() : String
+        return this.contenu + this.date;
+!!!130178.java!!!	hashCode() : int
+        return Integer.valueOf(this.id).hashCode() + this.auteur.hashCode();
