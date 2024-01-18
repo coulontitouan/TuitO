@@ -1,1 +1,2 @@
-java -cp json-simple.jar: report.java
+java -cp "bin:lib" src/Client
+java -cp "bin:lib/*" src/Serveur

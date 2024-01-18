@@ -3,9 +3,7 @@ package src;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,16 +11,14 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.TimeZone;
 import java.util.HashSet;
 import java.io.FileWriter;
-import java.io.IOException;
 import org.json.simple.JSONObject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class BDServeur {
   private static DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
@@ -117,7 +113,7 @@ public class BDServeur {
             fichierFinal.put(BDServeur.getUser(pseudo), user);
         }
         try {
-            FileWriter file = new FileWriter("test.json");
+            FileWriter file = new FileWriter("BDF.json");
             ObjectMapper mapper = new ObjectMapper();
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(fichierFinal);
 
@@ -160,5 +156,12 @@ public class BDServeur {
         listeMessages.put(id, message);
         return id;
   }
+
+public static void ajouterMessage(String pseudo, String message) {
+    Utilisateur user = BDServeur.getUser(pseudo);
+    Message m = new Message(user, message);
+    user.ajouterMessage(m);
+    listeMessages.put(m.getId(), m);
+}
 
 }
