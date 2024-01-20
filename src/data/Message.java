@@ -1,5 +1,5 @@
 
-package src;
+package src.data;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +17,7 @@ public class Message {
 
   private int statut;
 
-  Message(Utilisateur auteur, String contenu) {
+  public Message(Utilisateur auteur, String contenu) {
         this.id = BDServeur.getIdMessage(this);
         this.auteur = auteur;
         this.contenu = contenu;
@@ -26,7 +26,7 @@ public class Message {
         this.statut = 0;
   }
 
-  Message(int id, Utilisateur auteur, String contenu, Date date, List<String> likes, int statut) {
+  public Message(int id, Utilisateur auteur, String contenu, Date date, List<String> likes, int statut) {
         this.id = id;
         this.auteur = auteur;
         this.contenu = contenu;

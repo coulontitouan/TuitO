@@ -26,7 +26,7 @@ class Client {
         }
         System.out.println("Entrez l'adresse IP du serveur: (0.0.0.0)");
         String ip_serveur = scanner.nextLine();
-        if (ip_serveur.matches("^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$")){
+        if (ip_serveur.matches("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$")){
             System.out.println("L'adresse IP est valide.");
         } else {
             System.out.println("L'adresse IP n'est pas valide.");

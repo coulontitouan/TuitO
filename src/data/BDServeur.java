@@ -1,5 +1,5 @@
 
-package src;
+package src.data;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -70,7 +70,7 @@ public class BDServeur {
 
                     int statut = (int) messages.get(id).get("statut");
 
-                    Message message = new Message(idInteger, user, contenu, dateDate, likes, statut);
+                    Message message = new src.data.Message(idInteger, user, contenu, dateDate, likes, statut);
                     listeMessages.put(idInteger, message);
                     user.ajouterMessage(message);
                 }

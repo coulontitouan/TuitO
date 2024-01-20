@@ -1,5 +1,5 @@
 
-package src;
+package src.data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ public class Utilisateur {
 
   private List<Message> messages;
 
-  Utilisateur(String pseudo) {
+  public Utilisateur(String pseudo) {
         this.pseudo = pseudo;
         this.messages = new ArrayList<>();
   }
