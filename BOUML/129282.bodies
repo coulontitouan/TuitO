@@ -1,0 +1,5 @@
+class Commande
+!!!131202.java!!!	getInstance() : Commande
+        return instance;
+!!!131330.java!!!	execute(in pseudo : String, inout arguments : String [[]], inout writer : PrintWriter) : void
+        writer.write("Commande non reconnue\n");

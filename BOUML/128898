@@ -1,0 +1,479 @@
+format 222
+"threads" // src::threads
+  revision 1
+  modified_by 2 "livreur"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "/Users/livreur/Documents/GitHub/TuitO/src/threads/"
+  java_package "threads"
+  classview 129026 "threads"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 130946 "ClientHandler"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 132098 // <generalisation>
+	relation 132098 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 132098 // <generalisation>
+	  b parent class_ref 131074 // Handler
+      end
+
+      operation 140930 "ClientHandler"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "socket" explicit_type "Socket"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141058 "run"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 131074 "Handler"
+      abstract visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 131970 // <realization>
+	relation 131970 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 131970 // <realization>
+	  b parent class_ref 131202 // Runnable
+      end
+
+      attribute 131970 "socket"
+	protected explicit_type "Socket"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 132098 "stream"
+	protected explicit_type "InputStreamReader"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 132226 "writer"
+	protected explicit_type "PrintWriter"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 132354 "reader"
+	protected explicit_type "BufferedReader"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 140674 "Handler"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "socket" explicit_type "Socket"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140802 "run"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 131330 "ClientJFXHandler"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 132226 // <generalisation>
+	relation 132226 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 132226 // <generalisation>
+	  b parent class_ref 131074 // Handler
+      end
+
+      classrelation 132354 // contenu (<unidirectional association>)
+	relation 132354 --->
+	  a role_name "contenu" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 132354 // contenu (<unidirectional association>)
+	  b parent class_ref 128642 // Content
+      end
+
+      operation 141186 "ClientJFXHandler"
+	public explicit_return_type ""
+	nparams 2
+	  param inout name "socket" explicit_type "Socket"
+	  param inout name "contenu" type class_ref 128642 // Content
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141314 "run"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 131458 "CommandeServeur"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 132482 // <realization>
+	relation 132482 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 132482 // <realization>
+	  b parent class_ref 131202 // Runnable
+      end
+
+      attribute 132482 "serverSock"
+	private explicit_type "ServerSocket"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 141442 "CommandeServeur"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "serverSock" explicit_type "ServerSocket"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141570 "run"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 131586 "Sauvegarde"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 132610 // <realization>
+	relation 132610 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 132610 // <realization>
+	  b parent class_ref 131202 // Runnable
+      end
+
+      operation 141698 "run"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 131714 "ServeurHandler"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 132738 // <generalisation>
+	relation 132738 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 132738 // <generalisation>
+	  b parent class_ref 131074 // Handler
+      end
+
+      operation 141826 "ServeurHandler"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "socket" explicit_type "Socket"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141954 "run"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 128770 "threads"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 130690 "Handler"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+${definition}"
+      associated_elems
+	class_ref 131074 // Handler
+      end
+    end
+
+    artifact 130818 "ClientHandler"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.net.Socket;
+${definition}"
+      associated_elems
+	class_ref 130946 // ClientHandler
+      end
+    end
+
+    artifact 130946 "ClientJFXHandler"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.IOException;
+import java.net.Socket;
+import application.Content;
+${definition}"
+      associated_elems
+	class_ref 131330 // ClientJFXHandler
+      end
+    end
+
+    artifact 131074 "CommandeServeur"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.net.ServerSocket;
+import java.util.Scanner;
+import data.BDServeur;
+${definition}"
+      associated_elems
+	class_ref 131458 // CommandeServeur
+      end
+    end
+
+    artifact 131202 "Sauvegarde"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import data.BDServeur;
+${definition}"
+      associated_elems
+	class_ref 131586 // Sauvegarde
+      end
+    end
+
+    artifact 131330 "ServeurHandler"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Map;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import commands.*;
+import data.BDServeur;
+${definition}"
+      associated_elems
+	class_ref 131714 // ServeurHandler
+      end
+    end
+  end
+end

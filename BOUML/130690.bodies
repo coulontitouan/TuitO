@@ -1,0 +1,56 @@
+class Message
+!!!137218.java!!!	Message(inout auteur : Utilisateur, in contenu : String)
+            this.id = BDServeur.getIdMessage(this);
+            this.auteur = auteur;
+            this.contenu = contenu;
+            this.date = new Date();
+            this.likes = new ArrayList<>();
+            this.statut = Statut.CREE;
+!!!137346.java!!!	Message(in id : int, inout auteur : Utilisateur, in contenu : String, inout date : Date, inout likes : List<String>, inout statut : Statut)
+            this.id = id;
+            this.auteur = auteur;
+            this.contenu = contenu;
+            this.date = date;
+            this.likes = likes;
+            this.statut = statut;
+!!!137474.java!!!	getId() : int
+            return this.id;
+!!!137602.java!!!	getAuteur() : Utilisateur
+            return this.auteur;
+!!!137730.java!!!	getContenu() : String
+            return this.contenu;
+!!!137858.java!!!	getDateFormat() : String
+            Calendar cal = Calendar.getInstance(new Locale("fr", "FR"));
+            cal.setTime(this.date);
+            String res = String.format("%1$td/%1$tm/%1$tY %1$tH:%1$tM:%1$tS", cal);
+            return res;
+!!!137986.java!!!	getDate() : String
+            return BDServeur.dateFormat.format(this.date);
+!!!138114.java!!!	getLikes() : List<String>
+            return this.likes;
+!!!138242.java!!!	getStatut() : Statut
+            return this.statut;
+!!!138370.java!!!	toJSON() : String
+            Map<String, Object> message = new HashMap<>();
+            message.put("id", this.getId());
+            message.put("user", this.getAuteur().getPseudo());
+            message.put("date", this.getDate());
+            message.put("likes", this.getLikes().size());
+            message.put("content", this.getContenu());
+            message.put("statut", this.getStatut().getValue());
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = "";
+            try {
+                  while (json.equals("")) {
+                        json = objectMapper.writeValueAsString(message);
+                  }
+            } catch (JsonProcessingException e) {
+                  System.out.println(e);
+            }
+            return json;
+!!!138498.java!!!	setStatut(in i : int) : void
+            this.statut = Statut.fromValue(i);
+!!!138626.java!!!	toString() : String
+            return this.contenu + this.date;
+!!!138754.java!!!	hashCode() : int
+            return Integer.valueOf(this.id).hashCode() + this.auteur.hashCode();

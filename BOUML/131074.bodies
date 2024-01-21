@@ -1,0 +1,21 @@
+class Handler
+!!!140674.java!!!	Handler(inout socket : Socket)
+        try {
+            this.socket = socket;
+            this.stream = new InputStreamReader(this.socket.getInputStream());
+            this.writer = new PrintWriter(this.socket.getOutputStream());
+            this.reader = new BufferedReader(stream);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+!!!140802.java!!!	run() : void
+        try {
+            String raw = reader.readLine();
+            while(raw != null) {
+                System.out.println(raw);
+                raw = reader.readLine();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return;

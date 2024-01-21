@@ -1,7 +1,7 @@
-format 224
-"unknown" // unknown
+format 222
+"src" // src
   revision 1
-  modified_by 2 "coulo"
+  modified_by 2 "livreur"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -30,8 +30,8 @@ format 224
   activitydiagramsettings
    end
   
-  java_dir "<unknown>"
-  classview 128258 "unknown"
+  java_dir "/Users/livreur/Documents/GitHub/TuitO/src/"
+  classview 128258 "src"
     
     classdiagramsettings member_max_width 0 end
     
@@ -51,7 +51,7 @@ format 224
     
     activitydiagramsettings
      end
-    class 129154 "Runnable"
+    class 128130 "Client"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
@@ -63,6 +63,209 @@ ${members}}
       explicit_switch_type ""
       mysql_decl ""
       
+      attribute 128130 "dateFormat"
+	class_attribute private explicit_type "DateFormat"
+	init_value " new SimpleDateFormat(\"yyyy-MM-dd'T'HH:mm:ss'Z'\")"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128258 "pseudo"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128386 "ipServeur"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128514 "port"
+	private explicit_type "Integer"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128642 "scanner"
+	public explicit_type "Scanner"
+	init_value " new Scanner(System.in)"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 128130 "pseudo"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128258 "ipServeur"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128386 "portServeur"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128514 "sauvegarde"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128642 "main"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "args" explicit_type "String"
+	multiplicity "[]"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}[] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 128258 "Serveur"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 128770 "main"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "args" explicit_type "String"
+	multiplicity "[]"
+	nexceptions 1
+	  explicit_exception "Exception"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0}[] ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
   end
+
+  deploymentview 128130 "src"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128130 "Client"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.io.*;
+import java.net.Socket;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import threads.ClientHandler;
+${definition}"
+      associated_elems
+	class_ref 128130 // Client
+      end
+    end
+
+    artifact 128258 "Serveur"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import java.net.ServerSocket;
+import java.net.Socket;
+import data.BDServeur;
+import threads.CommandeServeur;
+import threads.Sauvegarde;
+import threads.ServeurHandler;
+${definition}"
+      associated_elems
+	class_ref 128258 // Serveur
+      end
+    end
+  end
+
+  package_ref 128258 // application
+
+  package_ref 128642 // commands
+
+  package_ref 128770 // data
+
+  package_ref 128898 // threads
 end

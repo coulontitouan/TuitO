@@ -1,0 +1,15 @@
+class ClientJFXHandler
+!!!141186.java!!!	ClientJFXHandler(inout socket : Socket, inout contenu : Content)
+        super(socket);
+        this.contenu = contenu;
+!!!141314.java!!!	run() : void
+        try {
+            String raw = reader.readLine();
+            while(raw != null) {
+                this.contenu.setContent(raw);
+                raw = reader.readLine();
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return;

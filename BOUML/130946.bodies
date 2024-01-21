@@ -1,0 +1,5 @@
+class ClientHandler
+!!!140930.java!!!	ClientHandler(inout socket : Socket)
+        super(socket);
+!!!141058.java!!!	run() : void
+        super.run();

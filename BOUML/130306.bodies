@@ -1,0 +1,24 @@
+class Unlike
+!!!134530.java!!!	getInstance() : Unlike
+        return instance;
+!!!134658.java!!!	execute(in pseudo : String, inout arguments : String [[]], inout writer : PrintWriter) : void
+        for(String argument : arguments){
+            Integer id = null;
+            Message message = null;
+            try {
+                id = Integer.parseInt(argument);
+                message = BDServeur.getMessage(id);
+            } catch (Exception e) {
+                //L'argument n'est pas un entier
+            }
+            if (message != null){
+                if (message.getLikes().remove(pseudo)){
+                    BDServeur.unlike(BDServeur.getUser(pseudo), message);
+                    writer.write("Vous n'aimez plus le message " + id + ".\n");
+                }else{
+                    writer.write("Vous n'aimiez pas le message " + id + ".\n");
+                }
+            }else{
+                writer.write("Le message " + id + " n'existe pas.\n");
+            }
+        }

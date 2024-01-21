@@ -1,0 +1,16 @@
+class Supprimer
+!!!133762.java!!!	getInstance() : Supprimer
+        return instance;
+!!!133890.java!!!	execute(in pseudo : String, inout arguments : String [[]], inout writer : PrintWriter) : void
+        Integer id = Integer.parseInt(arguments[0]);
+        Message message = BDServeur.getMessage(id);
+        if (message != null){
+            if (message.getAuteur().getPseudo().equals(pseudo)){
+                BDServeur.supprimer(message);
+                writer.write("Le message " + id + " a été supprimé.\n");
+            }else{
+                writer.write("Vous n'êtes pas l'auteur du message " + id + ".\n");
+            }
+        }else{
+            writer.write("Le message " + id + " n'existe pas.\n");
+        }

@@ -1,0 +1,27 @@
+class Follow
+!!!131586.java!!!	getInstance() : Follow
+        return instance;
+!!!131714.java!!!	execute(in pseudo : String, inout arguments : String [[]], inout writer : PrintWriter) : void
+        Utilisateur user = BDServeur.getUser(pseudo);
+        String res = "";
+        for (String argument : arguments){
+            Utilisateur userToFollow = BDServeur.getUser(argument);
+            if (userToFollow != null){
+                if (userToFollow.getPseudo().equals(user.getPseudo())){
+                    res += "Vous ne pouvez pas vous suivre vous-même.";
+                    continue;
+                }
+                if (BDServeur.getAbonnements(user).contains(userToFollow.getPseudo())){
+                    res += "Vous suivez déjà " + argument + ".";
+                }
+                else{
+                    BDServeur.follow(userToFollow, user);
+                    res += "Vous suivez maintenant " + argument + ".";
+                }
+            }
+            else{
+                res += "L'utilisateur " + argument + " n'existe pas.";
+            }
+            res += "\n";
+        }
+        writer.write(res);

@@ -1,0 +1,27 @@
+class Utilisateur
+!!!139266.java!!!	Utilisateur(in pseudo : String)
+            this.pseudo = pseudo;
+            this.messages = new ArrayList<>();
+!!!139394.java!!!	getPseudo() : String
+            return this.pseudo;
+!!!139522.java!!!	suivre(inout user : Utilisateur) : void
+            BDServeur.getAbonnements(user).add(this.pseudo);
+            BDServeur.getAbonnes(this).add(user.getPseudo());
+!!!139650.java!!!	stop_suivre(inout user : Utilisateur) : void
+            BDServeur.getAbonnements(user).remove(this.pseudo);
+            BDServeur.getAbonnes(this).remove(user.getPseudo());
+!!!139778.java!!!	getMessages() : Message
+            return this.messages;
+!!!139906.java!!!	envoyerMessage(in contenu : String) : void
+            this.messages.add(new Message(this, contenu));
+!!!140034.java!!!	ajouterMessage(inout message : Message) : void
+            this.messages.add(message);
+!!!140162.java!!!	like(inout message : Message) : void
+            message.getLikes().add(this.pseudo);
+!!!140290.java!!!	unlike(inout message : Message) : void
+            message.getLikes().remove(this.pseudo);
+!!!140418.java!!!	toString() : String
+            return pseudo + " : " + BDServeur.getAbonnes(this).size() + " followers, "
+            + this.getMessages().size() + " messages, " + BDServeur.getAbonnements(this).size() + " abonnements";
+!!!140546.java!!!	hashCode() : int
+            return this.pseudo.hashCode();

@@ -1,0 +1,11 @@
+class Content
+!!!129794.java!!!	Content(in content : String)
+        this.content = content;
+!!!129922.java!!!	Content()
+        this.content = "";
+!!!130050.java!!!	getContent() : String
+        return this.content;
+!!!130178.java!!!	setContent(in content : String) : void
+        this.content = content;
+!!!130306.java!!!	addContent(in content : String) : void
+        this.content += content;

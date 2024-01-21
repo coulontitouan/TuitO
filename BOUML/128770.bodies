@@ -1,10 +1,21 @@
-class Serveur
-!!!131842.java!!!	main(inout args : String [[]]) : void
-        BDServeur.loadDB();
-        ServerSocket serverSock = new ServerSocket(4444);
-        while(true){
-            Socket clientSocket = serverSock.accept();
-            Thread t = new Thread(new ClientHandler(clientSocket));
-            t.start();
+class CConfirmer
+!!!130434.java!!!	CConfirmer(inout client : ClientJFX, inout pseudoTextField : TextField, inout ipTextField : TextField, inout portTextField : TextField)
+        this.client = client;
+        this.pseudoTextField = pseudoTextField;
+        this.ipTextField = ipTextField;
+        this.portTextField = portTextField;
+!!!130562.java!!!	handle(inout event : ActionEvent) : void
+        client.ipServeur = ipTextField.getText();
+        client.port = Integer.parseInt(portTextField.getText());
+        client.pseudo = pseudoTextField.getText();
+        client.connecte();
+        
+        try {
+            FileWriter writer = new FileWriter(".client");
+            writer.write(client.ipServeur + ":" + client.port + "\n");
+            writer.write(client.pseudo);
+            writer.close();
+            System.out.println("Fichier de configuration sauvegardé.");
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la sauvegarde du fichier de configuration.");
         }
-        //BDServeur.saveDB();

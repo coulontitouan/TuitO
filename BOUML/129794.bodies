@@ -1,0 +1,14 @@
+class Reception
+!!!132738.java!!!	getInstance() : Reception
+        return instance;
+!!!132866.java!!!	execute(in pseudo : String, inout arguments : String [[]], inout writer : PrintWriter) : void
+        String res = "";
+        Set<Message> listeMessages = BDServeur.messageAEnvoyer.get(BDServeur.getUser(pseudo));
+        if (listeMessages != null) {
+            for (Message m : listeMessages) {
+                res += m.toJSON() + "\n";
+            }
+        }else{
+            res = "Aucun message à recevoir.\n";
+        }
+        writer.print(res);

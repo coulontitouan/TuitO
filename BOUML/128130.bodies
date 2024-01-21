@@ -1,20 +1,116 @@
-class Utilisateur
-!!!130306.java!!!	Utilisateur(in pseudo : String)
-        this.pseudo = pseudo;
-        this.messages = new ArrayList<>();
-!!!130434.java!!!	getPseudo() : String
-        return this.pseudo;
-!!!130562.java!!!	suivre(in pseudo : String) : void
-        BDServeur.getSuivis(this).add(pseudo);
-!!!130690.java!!!	stopSuivre(in pseudo : String) : void
-        BDServeur.getSuiveurs(this).remove(pseudo);
-!!!130818.java!!!	getMessages() : Message
-        return this.messages;
-!!!130946.java!!!	envoyerMessage(in contenu : String) : void
-        this.messages.add(new Message(this, contenu));
-!!!131074.java!!!	ajouterMessage(inout message : Message) : void
-        this.messages.add(message);
-!!!131202.java!!!	toString() : String
-        return this.pseudo;
-!!!131330.java!!!	hashCode() : int
-        return this.pseudo.hashCode();
+class Client
+!!!128130.java!!!	pseudo() : void
+        while (this.pseudo == null || this.pseudo.equals("")) {
+            if (this.pseudo != null){
+                System.out.println("Votre pseudo ne peut pas être vide.");
+            }
+            System.out.println("Entrez votre pseudo:");
+            System.out.print(">>> ");
+            this.pseudo = scanner.nextLine();
+        }
+!!!128258.java!!!	ipServeur() : void
+        while (this.ipServeur == null || !this.ipServeur.matches("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$")){
+            if (this.ipServeur != null){
+                System.out.println("L'adresse IP n'est pas valide.");
+            }
+            System.out.println("Entrez l'adresse IP du serveur: ");
+            System.out.print(">>> ");
+            this.ipServeur = this.scanner.nextLine();
+        }
+!!!128386.java!!!	portServeur() : void
+        while (this.port == null || this.port < 0 || this.port > 65535){
+            if (this.port != null){
+                System.out.println("Le port n'est pas valide.");
+            }
+            System.out.println("Entrez le port du serveur: ");
+            System.out.print(">>> ");
+            try {
+                this.port = Integer.parseInt(this.scanner.nextLine());
+            } catch (Exception e) {
+                // Pas un integer donc on recommence
+                this.port = -1;
+            }
+        }
+!!!128514.java!!!	sauvegarde() : void
+        try {
+            FileWriter writer = new FileWriter(".client");
+            writer.write(this.ipServeur + ":" + this.port + "\n");
+            writer.write(this.pseudo);
+            writer.close();
+            System.out.println("Fichier de configuration sauvegardé.");
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la sauvegarde du fichier de configuration.");
+        }
+!!!128642.java!!!	main(inout args : String [[]]) : void
+        Client client = new Client();
+
+        if(new File(".client").exists()){
+            System.out.println("Un fichier de configuration existe déjà, voulez-vous l'utiliser ? (y/n)");
+            String reponse = null;
+            while (reponse == null || !reponse.equals("y") && !reponse.equals("n")){
+                if (reponse != null){
+                    System.out.println("Veuillez répondre par y ou n.");
+                }
+                System.out.print(">>> ");
+                reponse = client.scanner.nextLine();
+            }
+            if (reponse.equals("y")){
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader(".client"));
+                    String ligne = reader.readLine();
+                    String[] ipPort = ligne.split(":");
+                    client.ipServeur = ipPort[0];
+                    client.port = Integer.parseInt(ipPort[1]);
+                    ligne = reader.readLine();
+                    client.pseudo = ligne;
+                    reader.close();
+                } catch (Exception e) {
+                    System.out.println("Erreur lors de la lecture du fichier de configuration.");
+                }
+            }
+        }
+
+        client.pseudo();
+        client.ipServeur();
+        client.portServeur();
+
+        client.sauvegarde();
+
+        int counter = 0;
+        while (true) {
+            try {
+                Socket socket = new Socket(client.ipServeur, client.port);
+
+                Thread t = new Thread(new ClientHandler(socket));
+                t.start();
+
+                PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+                Map<String, Object> message = new HashMap<>();
+                message.put("id", null);
+                message.put("user", client.pseudo);
+                message.put("date", Client.dateFormat.format(new Date()));
+                message.put("likes", 0);
+
+                Thread.sleep(100); // Eviter que le client puisse spam les commandes
+                System.out.print(">>> ");
+                String contenu = client.scanner.nextLine();
+                System.out.print(String.format("%1$s : %2$s -> ", client.pseudo, contenu));
+
+                message.put("content", contenu);
+
+                ObjectMapper objectMapper = new ObjectMapper();
+
+                String json = objectMapper.writeValueAsString(message);
+
+                writer.println(json);
+                writer.flush();
+            } catch (Exception e) {
+                counter += 1;
+                if (counter == 5){
+                    System.out.println("Impossible de se connecter au serveur. Vérifiez l'adresse IP et le port. (" + client.ipServeur + ":" + client.port + ")");
+                    System.err.println(e);
+                    System.exit(1);
+                }
+            }
+        }

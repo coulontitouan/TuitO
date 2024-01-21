@@ -1,0 +1,24 @@
+class CFichier
+!!!130946.java!!!	CFichier(inout pseudoTextField : TextField, inout ipTextField : TextField, inout portTextField : TextField)
+        this.pseudoTextField = pseudoTextField;
+        this.ipTextField = ipTextField;
+        this.portTextField = portTextField;
+!!!131074.java!!!	handle(inout event : ActionEvent) : void
+        if (new File(".client").exists()) {
+            Button button = (Button) event.getSource();
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(".client"));
+                String ligne = reader.readLine();
+                String[] ipPort = ligne.split(":");
+                ipTextField.setText(ipPort[0]);
+                portTextField.setText(ipPort[1]);
+                ligne = reader.readLine();
+                pseudoTextField.setText(ligne);
+                button.setText("Informations récupérées.");
+                button.setDisable(true);
+                reader.close();
+            } catch (Exception e) {
+                button = (Button) event.getSource();
+                button.setText("Erreur lors de la lecture du fichier de configuration.");
+            }
+        }

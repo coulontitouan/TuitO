@@ -1,0 +1,12 @@
+class Statut
+!!!138882.java!!!	Statut(in value : int)
+        this.value = value;
+!!!139010.java!!!	getValue() : int
+        return this.value;
+!!!139138.java!!!	fromValue(in value : int) : Statut
+        for (Statut statut : Statut.values()) {
+            if (statut.getValue() == value) {
+                return statut;
+            }
+        }
+        return null;

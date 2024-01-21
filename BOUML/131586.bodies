@@ -1,0 +1,11 @@
+class Sauvegarde
+!!!141698.java!!!	run() : void
+        while (true) {
+            try {
+                Thread.sleep(60000);
+                System.out.println("Sauvegarde de la base de données...");
+                BDServeur.saveDB();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
