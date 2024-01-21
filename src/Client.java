@@ -11,80 +11,136 @@ import java.util.Map;
 import java.util.Scanner;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import src.threads.ClientHandler;
+
 class Client {
     private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-    private static String pseudo;
+    private String pseudo;
+    private String ipServeur;
+    private Integer port;
+    public Scanner scanner = new Scanner(System.in);
+
+    public void pseudo() {
+        while (this.pseudo == null || this.pseudo.equals("")) {
+            if (this.pseudo != null){
+                System.out.println("Votre pseudo ne peut pas être vide.");
+            }
+            System.out.println("Entrez votre pseudo:");
+            System.out.print(">>> ");
+            this.pseudo = scanner.nextLine();
+        }
+    }
+
+    public void ipServeur() {
+        while (this.ipServeur == null || !this.ipServeur.matches("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$")){
+            if (this.ipServeur != null){
+                System.out.println("L'adresse IP n'est pas valide.");
+            }
+            System.out.println("Entrez l'adresse IP du serveur: ");
+            System.out.print(">>> ");
+            this.ipServeur = this.scanner.nextLine();
+        }
+    }
+
+    public void portServeur() {
+        while (this.port == null || this.port < 0 || this.port > 65535){
+            if (this.port != null){
+                System.out.println("Le port n'est pas valide.");
+            }
+            System.out.println("Entrez le port du serveur: ");
+            System.out.print(">>> ");
+            try {
+                this.port = Integer.parseInt(this.scanner.nextLine());
+            } catch (Exception e) {
+                // Pas un integer donc on recommence
+                this.port = -1;
+            }
+        }
+    }
+
+    public void sauvegarde() {
+        try {
+            FileWriter writer = new FileWriter(".client");
+            writer.write(this.ipServeur + ":" + this.port + "\n");
+            writer.write(this.pseudo);
+            writer.close();
+            System.out.println("Fichier de configuration sauvegardé.");
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la sauvegarde du fichier de configuration.");
+        }
+    }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Entrez votre pseudo:");
-        Client.pseudo = scanner.nextLine();
-        while (Client.pseudo.equals("")) {
-            System.out.println("Votre pseudo ne peut pas être vide.");
-            System.out.println("Entrez votre pseudo:");
-            Client.pseudo = scanner.nextLine();
-        }
-        System.out.println("Entrez l'adresse IP du serveur: (0.0.0.0)");
-        String ip_serveur = scanner.nextLine();
-        if (ip_serveur.matches("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$")){
-            System.out.println("L'adresse IP est valide.");
-        } else {
-            System.out.println("L'adresse IP n'est pas valide.");
-            System.out.println("Entrez l'adresse IP du serveur: (" + ip_serveur + ")");
-        }
-        System.out.println("Entrez le port du serveur: (4444)");
-        int port = scanner.nextInt();
-        scanner.nextLine();
+        Client client = new Client();
 
+        if(new File(".client").exists()){
+            System.out.println("Un fichier de configuration existe déjà, voulez-vous l'utiliser ? (y/n)");
+            String reponse = null;
+            while (reponse == null || !reponse.equals("y") && !reponse.equals("n")){
+                if (reponse != null){
+                    System.out.println("Veuillez répondre par y ou n.");
+                }
+                System.out.print(">>> ");
+                reponse = client.scanner.nextLine();
+            }
+            if (reponse.equals("y")){
+                try {
+                    BufferedReader reader = new BufferedReader(new FileReader(".client"));
+                    String ligne = reader.readLine();
+                    String[] ipPort = ligne.split(":");
+                    client.ipServeur = ipPort[0];
+                    client.port = Integer.parseInt(ipPort[1]);
+                    ligne = reader.readLine();
+                    client.pseudo = ligne;
+                    reader.close();
+                } catch (Exception e) {
+                    System.out.println("Erreur lors de la lecture du fichier de configuration.");
+                }
+            }
+        }
+
+        client.pseudo();
+        client.ipServeur();
+        client.portServeur();
+
+        client.sauvegarde();
+
+        int counter = 0;
         while (true) {
             try {
-                Socket socket = new Socket(ip_serveur, port);
+                Socket socket = new Socket(client.ipServeur, client.port);
+
+                Thread t = new Thread(new ClientHandler(socket));
+                t.start();
+
                 PrintWriter writer = new PrintWriter(socket.getOutputStream());
 
                 Map<String, Object> message = new HashMap<>();
                 message.put("id", null);
-                message.put("user", Client.pseudo);
-                message.put("date", dateFormat.format(new Date()));
+                message.put("user", client.pseudo);
+                message.put("date", Client.dateFormat.format(new Date()));
                 message.put("likes", 0);
 
-                System.out.print("Entrez votre message : ");
-                String contenu = scanner.nextLine();
+                Thread.sleep(100); // Eviter que le client puisse spam les commandes
+                System.out.print(">>> ");
+                String contenu = client.scanner.nextLine();
+                System.out.print(String.format("%1$s : %2$s -> ", client.pseudo, contenu));
 
-                if(contenu.startsWith("/")){
-                    switch (contenu) {
-                        case "/help":
-                            System.out.println("Liste des commandes :");
-                            System.out.println("/help : Affiche la liste des commandes");
-                            System.out.println("/quit : Quitte le programme");
-                            System.out.println("/like : Like le dernier message");
-                            System.out.println("/unlike : Ne plus like le dernier message");
-                            System.out.println("/follow : Suivre un utilisateur");
-                            System.out.println("/unfollow : Ne plus suivre un utilisateur");
-                            System.out.println("/list : Affiche la liste des utilisateurs");
-                            System.out.println("/listfollow : Affiche la liste des utilisateurs suivis");
-                            System.out.println("/listfollower : Affiche la liste des utilisateurs qui vous suivent");
-                            System.out.println("/listmessage : Affiche la liste des messages");
-                            System.out.println("/listmessagefollow : Affiche la liste des messages des utilisateurs suivis");
-                            System.out.println("/listmessagefollower : Affiche la liste des messages des utilisateurs qui vous suivent");
-                            System.out.println("/listmessageuser : Affiche la liste des messages d'un utilisateur");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-                message.put("content", scanner.nextLine());
+                message.put("content", contenu);
 
                 ObjectMapper objectMapper = new ObjectMapper();
 
                 String json = objectMapper.writeValueAsString(message);
-                System.out.println(json);
 
                 writer.println(json);
                 writer.flush();
-                socket.close();
             } catch (Exception e) {
-                System.out.println(e);
+                counter += 1;
+                if (counter == 5){
+                    System.out.println("Impossible de se connecter au serveur. Vérifiez l'adresse IP et le port. (" + client.ipServeur + ":" + client.port + ")");
+                    System.err.println(e);
+                    System.exit(1);
+                }
             }
         }
     }
