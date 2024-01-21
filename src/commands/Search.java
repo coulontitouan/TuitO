@@ -1,10 +1,10 @@
-package src.commands;
+package commands;
 
 import java.io.PrintWriter;
 
-import src.data.BDServeur;
-import src.data.Utilisateur;
-import src.data.Message;
+import data.BDServeur;
+import data.Utilisateur;
+import data.Message;
 
 public class Search extends Commande {
 

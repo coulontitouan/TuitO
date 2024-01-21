@@ -1,4 +1,4 @@
-package src.threads;
+package threads;
 
 import java.net.Socket;
 

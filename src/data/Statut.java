@@ -1,4 +1,4 @@
-package src.data;
+package data;
 
 public enum Statut {
     CREE(0),

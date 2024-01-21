@@ -1,9 +1,9 @@
-package src.threads;
+package threads;
 
 import java.net.ServerSocket;
 import java.util.Scanner;
 
-import src.data.BDServeur;
+import data.BDServeur;
 
 public class CommandeServeur implements Runnable {
 

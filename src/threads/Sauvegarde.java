@@ -1,6 +1,6 @@
-package src.threads;
+package threads;
 
-import src.data.BDServeur;
+import data.BDServeur;
 
 public class Sauvegarde implements Runnable{
         public void run() {

@@ -1,4 +1,4 @@
-package src.threads;
+package threads;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,8 +7,8 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import src.commands.*;
-import src.data.BDServeur;
+import commands.*;
+import data.BDServeur;
 
 public class ServeurHandler extends Handler {
     public ServeurHandler(Socket socket) {

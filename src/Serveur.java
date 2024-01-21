@@ -1,13 +1,10 @@
-package src;
-
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
-import src.data.BDServeur;
-import src.threads.CommandeServeur;
-import src.threads.Sauvegarde;
-import src.threads.ServeurHandler;
+import data.BDServeur;
+import threads.CommandeServeur;
+import threads.Sauvegarde;
+import threads.ServeurHandler;
 
 class Serveur {
 

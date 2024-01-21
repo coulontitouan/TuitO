@@ -1,5 +1,5 @@
 
-package src.data;
+package data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class Utilisateur {
       @Override
       public String toString() {
             return pseudo + " : " + BDServeur.getAbonnes(this).size() + " followers, "
-            + this.getMessages().size() + " messages, " + BDServeur.getAbonnements(this).size() + " abonnements.";
+            + this.getMessages().size() + " messages, " + BDServeur.getAbonnements(this).size() + " abonnements";
       }
 
       @Override

@@ -1,5 +1,5 @@
 
-package src.data;
+package data;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +19,7 @@ import org.json.simple.JSONObject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import src.commands.Commande;
+import commands.Commande;
 
 public class BDServeur {
     public static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
@@ -43,14 +43,14 @@ public class BDServeur {
         BDServeur.listeAbonnements = new HashMap<>();
 
         dico = new HashMap<>();
-        dico.put("search", src.commands.Search.getInstance());
-        dico.put("help", src.commands.Help.getInstance());
-        dico.put("follow", src.commands.Follow.getInstance());
-        dico.put("unfollow", src.commands.Unfollow.getInstance());
-        dico.put("like", src.commands.Like.getInstance());
-        dico.put("unlike", src.commands.Unlike.getInstance());
-        dico.put("reception", src.commands.Reception.getInstance());
-        dico.put("supprimer", src.commands.Supprimer.getInstance());
+        dico.put("search", commands.Search.getInstance());
+        dico.put("help", commands.Help.getInstance());
+        dico.put("follow", commands.Follow.getInstance());
+        dico.put("unfollow", commands.Unfollow.getInstance());
+        dico.put("like", commands.Like.getInstance());
+        dico.put("unlike", commands.Unlike.getInstance());
+        dico.put("reception", commands.Reception.getInstance());
+        dico.put("supprimer", commands.Supprimer.getInstance());
 
         messageAEnvoyer = new HashMap<>();
     }
@@ -94,7 +94,7 @@ public class BDServeur {
 
                     Statut statut = Statut.fromValue((int) messages.get(id).get("statut"));
 
-                    Message message = new src.data.Message(idInteger, user, contenu, dateDate, likes, statut);
+                    Message message = new data.Message(idInteger, user, contenu, dateDate, likes, statut);
                     listeMessages.put(idInteger, message);
                     user.ajouterMessage(message);
                 }

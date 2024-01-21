@@ -1,10 +1,10 @@
-package src.commands;
+package commands;
 
 import java.io.PrintWriter;
 import java.util.Set;
 
-import src.data.BDServeur;
-import src.data.Message;
+import data.BDServeur;
+import data.Message;
 
 public class Reception extends Commande {
 

@@ -1,6 +1,3 @@
-
-package src;
-
 import java.io.*;
 import java.net.Socket;
 import java.text.DateFormat;
@@ -11,9 +8,9 @@ import java.util.Map;
 import java.util.Scanner;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import src.threads.ClientHandler;
+import threads.ClientHandler;
 
-class Client {
+class Client{
     private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
     private String pseudo;
     private String ipServeur;

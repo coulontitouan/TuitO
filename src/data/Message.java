@@ -1,5 +1,5 @@
 
-package src.data;
+package data;
 
 import java.util.ArrayList;
 import java.util.Calendar;

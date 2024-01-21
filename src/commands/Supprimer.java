@@ -1,9 +1,9 @@
-package src.commands;
+package commands;
 
 import java.io.PrintWriter;
 
-import src.data.BDServeur;
-import src.data.Message;
+import data.BDServeur;
+import data.Message;
 
 public class Supprimer extends Commande{
 

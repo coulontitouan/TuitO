@@ -1,0 +1,1 @@
+javac -cp "lib/*:src/commands/*:src/data/*:src/threads/*:src/application/*:src/application/controleurs/*" -d bin --module-path /Users/livreur/Documents/GitHub/TuitO/javafx-sdk-21.0.2/lib --add-modules javafx.controls,javafx.fxml ./src/*.java ./src/*/*.java ./src/*/*/*.java

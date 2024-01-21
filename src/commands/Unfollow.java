@@ -1,9 +1,9 @@
-package src.commands;
+package commands;
 
 import java.io.PrintWriter;
 
-import src.data.BDServeur;
-import src.data.Utilisateur;
+import data.BDServeur;
+import data.Utilisateur;
 
 public class Unfollow extends Commande{
 
