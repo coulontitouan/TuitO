@@ -10,6 +10,7 @@ public class Search extends Commande {
 
     private static final Search instance = new Search();
 
+    /* La commande permettant de chercher un utilisateur ou un message */
     private Search() {
     }
 

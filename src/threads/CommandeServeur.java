@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import data.BDServeur;
 
+/* Un thread pour les commandes du serveur */
 public class CommandeServeur implements Runnable {
 
     private ServerSocket serverSock;
@@ -13,6 +14,7 @@ public class CommandeServeur implements Runnable {
         this.serverSock = serverSock;
     }
 
+    /* Permet de lire le scanner et d'executer les commandes du serveur */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         while (true) {

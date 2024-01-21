@@ -15,6 +15,7 @@ public class ServeurHandler extends Handler {
         super(socket);
     }
 
+    /* permet de lire la socket avec le client et d'executer les actions en continue avec plusiseurs clients */
     public void run() {
         try {
             String raw = super.reader.readLine();

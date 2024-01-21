@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/* Un handler type, abstrait */
 public abstract class Handler implements Runnable {
     protected Socket socket;
     protected InputStreamReader stream;

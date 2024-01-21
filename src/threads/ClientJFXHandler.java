@@ -5,6 +5,7 @@ import java.net.Socket;
 
 import application.Content;
 
+/* Un handler pour le client graphique ** PAS FINI ** */
 public class ClientJFXHandler extends Handler {
 
     private Content contenu;

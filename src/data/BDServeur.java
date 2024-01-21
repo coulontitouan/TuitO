@@ -21,21 +21,30 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import commands.Commande;
 
+/* La BD du serveur permettant de faire les requetes et de stocker toutes les instances des messages et utilisateurs */
 public class BDServeur {
+    /* Pour stocker la date en format iso 8601 */
     public static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
+    /* la liste de tout les utilisateurs */
     public static Map<String, Utilisateur> listeUtilisateurs;
 
+    /* la liste de tout les messages */
     public static Map<Integer, Message> listeMessages;
 
+    /* la liste des abonnés de chaque utilisateur */
     private static Map<String, Set<String>> listeAbonnes;
 
+    /* la liste des abonnements de chaque utilisateur */
     private static Map<String, Set<String>> listeAbonnements;
 
+    /* le dictionnaire des commandes */
     public static Map<String, Commande> dico;
 
+    /* la liste des messages à envoyer à chaque utilisateur */
     public static Map<Utilisateur, Set<Message>> messageAEnvoyer;
 
+    /* Instancie toutes les variables */
     private static void creeVariables(){
         BDServeur.listeUtilisateurs = new HashMap<>();
         BDServeur.listeMessages = new HashMap<>();
@@ -55,6 +64,7 @@ public class BDServeur {
         messageAEnvoyer = new HashMap<>();
     }
 
+    /* Charge la BD depuis le fichier BD.json en utilisant jackson */
     public static void loadDB() {
         BDServeur.creeVariables();
 
@@ -117,8 +127,8 @@ public class BDServeur {
         }
     }
 
+    /* Sauvegarde la BD dans le fichier BD.json en utilisant json simple */
     public static void saveDB() {
-        // Creating a JSONObject object
         JSONObject fichierFinal = new JSONObject();
         for (String pseudo : listeUtilisateurs.keySet()) {
             JSONObject user = new JSONObject();
@@ -147,14 +157,17 @@ public class BDServeur {
         }
     }
 
+    /* Retourne l'utilisateur correspondant au pseudo */
     public static Utilisateur getUser(String pseudo) {
         return BDServeur.listeUtilisateurs.getOrDefault(pseudo, null);
     }
 
+    /* Retourne le message correspondant à l'id */
     public static Message getMessage(int id) {
         return BDServeur.listeMessages.getOrDefault(id, null);
     }
 
+    /* Retourne l'ensemble des abonnes d'un utilisateur */
     public static Set<String> getAbonnes(Utilisateur user) {
         if (BDServeur.listeAbonnes.containsKey(user.getPseudo())) {
             return BDServeur.listeAbonnes.get(user.getPseudo());
@@ -162,6 +175,7 @@ public class BDServeur {
         return new HashSet<>();
     }
 
+    /* Retourne l'ensemble des abonnements d'un utilisateur */
     public static Set<String> getAbonnements(Utilisateur user) {
         if (BDServeur.listeAbonnements.containsKey(user.getPseudo())) {
             return BDServeur.listeAbonnements.get(user.getPseudo());
@@ -169,12 +183,14 @@ public class BDServeur {
         return new HashSet<>();
     }
 
+    /* Place un message dans la bd avec son id */
     public static int getIdMessage(Message message) {
         int id = Collections.max(listeMessages.keySet()) + 1;
         listeMessages.put(id, message);
         return id;
     }
 
+    /* Poste un message */
     public static void ajouterMessage(String pseudo, String message) {
         Utilisateur user = BDServeur.getUser(pseudo);
         Message m = new Message(user, message);
@@ -188,44 +204,44 @@ public class BDServeur {
         }
     }
 
-    public static void supprimerMessage(String pseudo, int id) {
-        Utilisateur user = BDServeur.getUser(pseudo);
-        Message m = BDServeur.getMessage(id);
-        if (m.getAuteur().equals(user)) {
-            m.setStatut(1);
-        }
-    }
-
+    /* Fait suivre abonne à user */
     public static void follow(Utilisateur user, Utilisateur abonne){
         user.suivre(abonne);
         abonne.suivre(user);
     }
 
+    /* Arrete de faire suivre abonne à user */
     public static void unfollow(Utilisateur user, Utilisateur abonne){
         user.stop_suivre(abonne);
         abonne.stop_suivre(user);
     }
 
+    /* Fait liker un message à un utilisateur */
     public static void like(Utilisateur user, Message message){
         user.like(message);
     }
 
+    /* Fait unliker un message à un utilisateur */
     public static void unlike(Utilisateur user, Message message){
         user.unlike(message);
     }
 
+    /* Retourne la liste des utilisateurs */
     public static List<Utilisateur> getUtilisateurs() {
         return new ArrayList<>(BDServeur.listeUtilisateurs.values());
     }
 
+    /* supprime un message */
     public static void supprimer(Message message) {
         message.setStatut(Statut.SUPPRIME.getValue());
     }
 
+    /* Permet à l'admin de supprimer un message */
     public static void adminDeleteMessage(Integer id) throws NullPointerException {
         listeMessages.get(id).setStatut(Statut.SUPPRIME.getValue());
     }
 
+    /* Permet à l'admin de supprimer un utilisateur et tout ses messages */
     public static void adminRemoveUser(String pseudo) throws NullPointerException{
         listeUtilisateurs.remove(pseudo);
         for(String s : listeAbonnes.get(pseudo)){
@@ -243,6 +259,7 @@ public class BDServeur {
         }
     }
 
+    /* Permet de créer un utilisateur */
     public static void creeUtilisateur(String pseudo) {
         Utilisateur user = new Utilisateur(pseudo);
         listeUtilisateurs.put(pseudo, user);

@@ -9,6 +9,7 @@ public class Like extends Commande{
 
     private static final Like instance = new Like();
 
+    /* La commande permettant de like un message */
     private Like(){
     }
 

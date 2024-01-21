@@ -9,6 +9,7 @@ public class Unfollow extends Commande{
 
     private static final Unfollow instance = new Unfollow();
 
+    /* La commande permettant de se désabonner d'un utilisateur */
     private Unfollow(){
     }
 

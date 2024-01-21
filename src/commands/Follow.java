@@ -8,7 +8,8 @@ import data.Utilisateur;
 public class Follow extends Commande{
 
     private static final Follow instance = new Follow();
-
+    
+    /* La commande permettant de suivre un utilisateur */
     private Follow(){
     }
 

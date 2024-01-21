@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import threads.ClientHandler;
 
+/* Un client en terminal */
 class Client{
     private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
     private String pseudo;
@@ -17,6 +18,7 @@ class Client{
     private Integer port;
     public Scanner scanner = new Scanner(System.in);
 
+    /* Demande le pseudo de l'user */
     public void pseudo() {
         while (this.pseudo == null || this.pseudo.equals("")) {
             if (this.pseudo != null){
@@ -28,6 +30,7 @@ class Client{
         }
     }
 
+    /* Demande l'adresse IP du serveur */
     public void ipServeur() {
         while (this.ipServeur == null || !this.ipServeur.matches("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$")){
             if (this.ipServeur != null){
@@ -39,6 +42,7 @@ class Client{
         }
     }
 
+    /* Demande le port du serveur */
     public void portServeur() {
         while (this.port == null || this.port < 0 || this.port > 65535){
             if (this.port != null){
@@ -55,6 +59,7 @@ class Client{
         }
     }
 
+    /* Sauvegarde les informations du client dans un fichier .client */
     public void sauvegarde() {
         try {
             FileWriter writer = new FileWriter(".client");
@@ -112,6 +117,7 @@ class Client{
 
                 PrintWriter writer = new PrintWriter(socket.getOutputStream());
 
+                // les messages en json comme demandé dans le sujet
                 Map<String, Object> message = new HashMap<>();
                 message.put("id", null);
                 message.put("user", client.pseudo);
@@ -132,6 +138,7 @@ class Client{
                 writer.println(json);
                 writer.flush();
             } catch (Exception e) {
+                // Si on arrive pas à se connecter au serveur
                 counter += 1;
                 if (counter == 5){
                     System.out.println("Impossible de se connecter au serveur. Vérifiez l'adresse IP et le port. (" + client.ipServeur + ":" + client.port + ")");

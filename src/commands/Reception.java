@@ -10,6 +10,7 @@ public class Reception extends Commande {
 
     private static final Reception instance = new Reception();
 
+    /* La commande permettant de récuperer tout les messages en attente */
     private Reception() {
     }
 

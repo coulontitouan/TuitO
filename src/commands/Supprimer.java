@@ -9,9 +9,10 @@ public class Supprimer extends Commande{
 
     private static final Supprimer instance = new Supprimer();
 
+    /* La commande permettant de supprimer un message */
     private Supprimer(){
     }
-
+    
     public static Supprimer getInstance() {
         return instance;
     }

@@ -6,6 +6,7 @@ public class Help extends Commande{
 
     private static final Help instance = new Help();
 
+    /* La commande permettant d'obtenir toutes les commandes */
     private Help(){
     }
 

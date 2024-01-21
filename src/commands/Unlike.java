@@ -9,6 +9,7 @@ public class Unlike extends Commande{
 
     private static final Unlike instance = new Unlike();
 
+    /* La commande permettant de unlike un message */
     private Unlike(){
     }
 
